@@ -45,11 +45,21 @@ function playSound(letter) {
 for (var i = 0; i < buttonList.length; i++) {
   buttonList[i].addEventListener("click", function () {
     buttonInnerHTML = this.innerHTML;
+    buttonAnimation(buttonInnerHTML);
     playSound(buttonInnerHTML);
   });
 }
 
 document.addEventListener("keydown", function (e) {
   var pressedKey = e.key;
+  buttonAnimation(pressedKey);
   playSound(pressedKey);
 });
+
+function buttonAnimation(currentKey) {
+  document.querySelector(`.${currentKey}`).classList.add("pressed");
+
+  setTimeout(() => {
+    document.querySelector(`.${currentKey}`).classList.remove("pressed");
+  }, 100);
+}
